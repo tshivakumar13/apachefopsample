@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master master-name="letter" page-height="11in" page-width="8.5in" margin="1in">
+            <fo:region-body/>
+            <fo:region-before extent="2in"/>
+            <fo:region-after extent="1in"/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="letter">
+        <!-- Header Section -->
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block text-align="center" font-size="14pt" font-family="sans-serif">
+                <fo:external-graphic src="url('logo.png')" content-width="2in" content-height="1in"/>
+            </fo:block>
+            <fo:block text-align="center" font-size="10pt" font-family="sans-serif">
+                Company Name<br/>
+                1234 Street Address<br/>
+                City, State, ZIP Code<br/>
+                Phone: (123) 456-7890<br/>
+                Email: info@company.com
+            </fo:block>
+        </fo:static-content>
+
+        <!-- Footer Section -->
+        <fo:static-content flow-name="xsl-region-after">
+            <fo:block text-align="center" font-size="8pt" font-family="sans-serif">
+                Confidential - For recipient only
+            </fo:block>
+        </fo:static-content>
+
+        <!-- Body Section -->
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block font-size="12pt" font-family="sans-serif" line-height="14pt" space-after="1in">
+                <fo:inline font-weight="bold">Date:</fo:inline> 2023-10-01<br/>
+                <fo:inline font-weight="bold">Recipient:</fo:inline> John Doe<br/>
+                <fo:inline font-weight="bold">Address:</fo:inline> 5678 Another Street, City, State, ZIP Code
+            </fo:block>
+
+            <fo:block font-size="12pt" font-family="sans-serif" line-height="14pt" space-after="0.5in">
+                Dear John Doe,<br/><br/>
+                We are pleased to inform you about the following details:
+            </fo:block>
+
+            <!-- Table Section -->
+            <fo:table border="1pt solid black" table-layout="fixed" width="100%">
+                <fo:table-column column-width="2in"/>
+                <fo:table-column column-width="4in"/>
+                <fo:table-header>
+                    <fo:table-row>
+                        <fo:table-cell>
+                            <fo:block font-weight="bold" text-align="center">Item</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                            <fo:block font-weight="bold" text-align="center">Description</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-header>
+                <fo:table-body>
+                    <fo:table-row>
+                        <fo:table-cell>
+                            <fo:block>Item 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                            <fo:block>Description of Item 1</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell>
+                            <fo:block>Item 2</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell>
+                            <fo:block>Description of Item 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+
+            <fo:block font-size="12pt" font-family="sans-serif" line-height="14pt" space-before="0.5in">
+                Thank you for your attention. Please feel free to contact us for further details.<br/><br/>
+                Sincerely,<br/>
+                <fo:inline font-weight="bold">Your Company Name</fo:inline>
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>
