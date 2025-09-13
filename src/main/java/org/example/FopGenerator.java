@@ -40,6 +40,15 @@ public class FopGenerator {
                 transformer.transform(new StreamSource(foFile), new SAXResult(fop.getDefaultHandler()));
             }
 
+            // Output HTML file
+            File htmlFile = new File("output.tiff");
+            try (OutputStream out = new java.io.FileOutputStream(htmlFile)) {
+                Fop fop = fopFactory.newFop(MimeConstants.MIME_TIFF, foUserAgent, out);
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Transformer transformer = factory.newTransformer();
+                transformer.transform(new StreamSource(foFile), new SAXResult(fop.getDefaultHandler()));
+            }
+
             System.out.println("PDF and AFP files generated successfully.");
         } catch (Exception e) {
             e.printStackTrace();
