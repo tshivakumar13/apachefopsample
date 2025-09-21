@@ -1,0 +1,76 @@
+BEGIN OrchestrateRequest
+    // Step 1: Initialize variables
+    INPUT RequestDetails
+    SET Response = NULL
+    SET ErrorFlag = FALSE
+
+    // Step 2: Validate the request
+    IF ValidateRequest(RequestDetails) IS FALSE THEN
+        SET Response = "Invalid Request"
+        SET ErrorFlag = TRUE
+        GOTO EndProcess
+    END IF
+
+    // Step 3: Process the request
+    TRY
+	IF request is new Request 
+   	
+	 IF COMPOSITION Is Required 
+		CALL COMPOSITION 
+	 END IF 
+	 EndProcess. 
+	
+        ELSE IF request is Response from Composition 
+	  IF Requests Needs Delivery 
+		CALL DELIVERY 
+	 END IF 
+	 EndPROCESS
+   CATCH Exception 
+	SET Response = "Error occurred during processing"
+        SET ErrorFlag = TRUE
+        GOTO EndProcess
+   END TRY
+
+
+    // Step 6: End process
+    LABEL EndProcess
+    RETURN Response
+END OrchestrateRequest
+
+
+BEGIN ComposeRequest
+  INPUT RequestDetails 
+  SET Response=NULL 
+set ERRORFLAG=FALSE 
+
+   IF ValidateRequest(RequestDetails) IS FALSE THEN
+        SET Response = "Invalid Request"
+        SET ErrorFlag = TRUE
+        GOTO EndProcess
+    END IF
+TRY
+   CREATE A COMPOSITION TRANSACTION in DB
+   CALL EXSTREAM or OTHER COMPOSITION ENGINE with Request, 
+   IF SUCCESS 
+   UPDATE the TRANSACTION with Details of DOCUMENT ANd METADATA.  
+  
+   CATCH Exception 
+	SET Response = "Error occurred during processing"
+        SET ErrorFlag = TRUE
+        GOTO EndProcess
+   END TRY
+
+
+    // Step 6: End process
+    LABEL EndProcess
+    RETURN Response
+END ComposeRequest
+
+
+  UPDATE METADATA DETAILS TO the request. 
+ CALL NOTIFICAITON FOR COMPOSED EVENT 
+  
+		
+	
+
+END ComposeRequest
